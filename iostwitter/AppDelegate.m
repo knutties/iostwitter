@@ -7,6 +7,30 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "TwitterClient.h"
+
+@implementation NSURL (dictionaryFromQueryString)
+
+- (NSDictionary *)dictionaryFromQueryString
+{
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    
+    NSArray *pairs = [[self query] componentsSeparatedByString:@"&"];
+    
+    for(NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        
+        NSString *key = [[elements objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *val = [[elements objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [dictionary setObject:val forKey:key];
+    }
+    
+    return dictionary;
+}
+
+@end
 
 @implementation AppDelegate
 
@@ -14,6 +38,12 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    
+    LoginViewController *lvc = [[LoginViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:lvc];
+    self.window.rootViewController = nvc;
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -46,4 +76,39 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    if ([url.scheme isEqualToString:@"cptwitter"])
+    {
+        if ([url.host isEqualToString:@"oauth"])
+        {
+            NSDictionary *parameters = [url dictionaryFromQueryString];
+            if (parameters[@"oauth_token"] && parameters[@"oauth_verifier"]) {
+                TwitterClient *client = [TwitterClient instance:nil consumerSecret:nil];
+                
+                [client
+                 fetchAccessTokenWithPath:@"oauth/access_token" method:@"POST" requestToken:[BDBOAuthToken tokenWithQueryString:url.query] success:^(BDBOAuthToken *accessToken) {
+                     NSLog(@"got access token");
+                     [client.requestSerializer saveAccessToken:accessToken];
+                     
+                     [client homeTimeLineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                         NSLog(@"response is %@", responseObject);
+                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"failed to get response");
+                     }];
+                     
+                     
+                 } failure:^(NSError *error) {
+                     NSLog(@"failed to get access token");
+                 }
+             ];
+            }
+        }
+        return YES;
+    }
+    return NO;
+}
 @end
