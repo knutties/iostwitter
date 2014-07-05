@@ -29,6 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:nil action:nil];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,5 +45,11 @@
     NSString *consumerSecret = NSLocalizedStringFromTable(@"consumerSecret",  @"keys", @"comment");
     
     [[TwitterClient instance:consumerKey consumerSecret:consumerSecret] login];
+}
+
+- (void) logout {
+    TwitterClient *client = [TwitterClient instance:nil consumerSecret:nil];
+    NSLog(@"logging out");
+    [client logout];
 }
 @end

@@ -9,11 +9,10 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "TwitterClient.h"
-#import "HomeViewController.h"
-#import "MTLJSONAdapter.h"
-#import "Tweet.h"
+#import "TweetsViewController.h"
 
 @implementation NSURL (dictionaryFromQueryString)
+
 
 - (NSDictionary *)dictionaryFromQueryString
 {
@@ -46,6 +45,8 @@
     LoginViewController *lvc = [[LoginViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:lvc];
     self.window.rootViewController = nvc;
+    
+    self.navigationController = nvc;
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -97,28 +98,10 @@
                      NSLog(@"got access token");
                      [client.requestSerializer saveAccessToken:accessToken];
                      
-                     [client homeTimeLineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                         //NSLog(@"response is %@", responseObject);
-
-                         NSError *error;
-                         NSArray *tweets = [MTLJSONAdapter modelsOfClass:[Tweet class] fromJSONArray:responseObject error:&error];
-                         
-                         if (error) {
-                             NSLog(@"Couldn't deserealize app info data into JSON from NSData: %@", error);
-                             // TODO - retry
-                         } else {
-                         
-                             NSLog(@"mantle object array is %@", tweets);
-                         
-                             HomeViewController *homeViewController = [[HomeViewController alloc] init];
-                             self.window.rootViewController = homeViewController;
-                         }
-
-                         
-                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"failed to get response");
-                     }];
+                     // we have successfully logged-in, load the tweets view controller
                      
+                     TweetsViewController *tweetsViewController = [[TweetsViewController alloc] init];
+                     [self.navigationController pushViewController:tweetsViewController animated:YES];
                      
                  } failure:^(NSError *error) {
                      NSLog(@"failed to get access token");

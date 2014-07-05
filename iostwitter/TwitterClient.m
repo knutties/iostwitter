@@ -44,6 +44,10 @@ static NSString *const twitterBaseURL = @"https://api.twitter.com/";
     }];
 }
 
+- (void) logout {
+    [self.requestSerializer removeAccessToken];
+}
+
 - (AFHTTPRequestOperation *) homeTimeLineWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     return [self GET:@"1.1/statuses/home_timeline.json"
