@@ -1,0 +1,11 @@
+/* 
+  keys.strings
+  iostwitter
+
+  Created by Natarajan Kannan on 7/2/14.
+  Copyright (c) 2014 Y.CORP.YAHOO.COM\natarajk. All rights reserved.
+*/
+
+"consumerKey" = "c9dKQxzsO4nuYybR8hz5uw";
+"consumerSecret" = "om2O32c1SiJi4m25dav50HqmmBMUzmaG6n4r0v1VNvA";
+"foo" = "bar";

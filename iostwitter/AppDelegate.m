@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "TwitterClient.h"
+#import "HomeViewController.h"
+#import "MTLJSONAdapter.h"
+#import "Tweet.h"
 
 @implementation NSURL (dictionaryFromQueryString)
 
@@ -95,7 +98,23 @@
                      [client.requestSerializer saveAccessToken:accessToken];
                      
                      [client homeTimeLineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                         NSLog(@"response is %@", responseObject);
+                         //NSLog(@"response is %@", responseObject);
+
+                         NSError *error;
+                         NSArray *tweets = [MTLJSONAdapter modelsOfClass:[Tweet class] fromJSONArray:responseObject error:&error];
+                         
+                         if (error) {
+                             NSLog(@"Couldn't deserealize app info data into JSON from NSData: %@", error);
+                             // TODO - retry
+                         } else {
+                         
+                             NSLog(@"mantle object array is %@", tweets);
+                         
+                             HomeViewController *homeViewController = [[HomeViewController alloc] init];
+                             self.window.rootViewController = homeViewController;
+                         }
+
+                         
                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"failed to get response");
                      }];
