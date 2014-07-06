@@ -14,8 +14,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqZ-11-XJu">
-                    <rect key="frame" x="75" y="264" width="176" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqZ-11-XJu">
+                    <rect key="frame" x="30" y="30" width="260" height="508"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Login with twitter">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -26,6 +26,12 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="aqZ-11-XJu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="KjA-Mt-ae5"/>
+                <constraint firstItem="aqZ-11-XJu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="Oti-XT-vJz"/>
+                <constraint firstAttribute="trailing" secondItem="aqZ-11-XJu" secondAttribute="trailing" constant="30" id="h97-J4-dDb"/>
+                <constraint firstAttribute="bottom" secondItem="aqZ-11-XJu" secondAttribute="bottom" constant="30" id="yzm-Oe-aNV"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

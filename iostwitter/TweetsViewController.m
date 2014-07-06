@@ -9,7 +9,9 @@
 #import "TweetsViewController.h"
 #import "TwitterClient.h"
 #import "MTLJSONAdapter.h"
+#import "UIImageView+AFNetworking.h"
 #import "Tweet.h"
+#import "TweetCell.h"
 
 
 @interface TweetsViewController ()
@@ -95,11 +97,29 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     
-    // NSLog(@"cell for row %d", indexPath.row);
+    Tweet *tweet = self.tweets[indexPath.row];
     
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = @"Hello World";
+    cell.userNameLabel.text = tweet.userName;
+    cell.userHandleLabel.text = [NSString stringWithFormat:@"@%@", tweet.userHandle];
+    cell.tweetLabel.text = tweet.tweetText;
+    
+    NSURL *userPhotoURL = tweet.userPhotoURL;
+    
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:userPhotoURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    
+    [cell.userImageView setImageWithURLRequest:urlRequest placeholderImage:[UIImage imageNamed:@"1x1"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        cell.userImageView.image = image;
+        [UIView animateWithDuration:1.0 animations:^{
+            cell.userImageView.alpha = 1.0;
+        }];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        // TODO - fall back to default url
+        NSLog(@"Request failed with error: %@", error);
+    }];
+    
     return cell;
 }
 

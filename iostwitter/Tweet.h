@@ -15,6 +15,6 @@
 @property (nonatomic) NSString *userName;
 @property (nonatomic) NSString *tweetText;
 //@property (nonatomic) NSDate *createdAt;
-//@property (nonatomic) NSURL *userPhotoURL;
+@property (nonatomic) NSURL *userPhotoURL;
 
 @end
