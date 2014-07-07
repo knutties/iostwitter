@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="388" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-uA-pzM">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-uA-pzM">
                         <rect key="frame" x="11" y="15" width="68" height="68"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
@@ -22,14 +22,14 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POU-i3-mIz">
-                        <rect key="frame" x="93" y="14" width="83" height="21"/>
+                        <rect key="frame" x="93" y="13" width="72" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Handle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ouA-BA-fGg">
-                        <rect key="frame" x="205" y="14" width="77" height="21"/>
+                        <rect key="frame" x="181" y="14" width="71" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,7 +43,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYe-rs-aJW">
-                        <rect key="frame" x="336" y="15" width="42" height="21"/>
+                        <rect key="frame" x="291" y="15" width="82" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,13 +51,13 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ouA-BA-fGg" firstAttribute="leading" secondItem="POU-i3-mIz" secondAttribute="trailing" constant="29" id="0MR-dv-7zG"/>
+                    <constraint firstItem="ouA-BA-fGg" firstAttribute="leading" secondItem="POU-i3-mIz" secondAttribute="trailing" constant="23" id="0MR-dv-7zG"/>
                     <constraint firstAttribute="trailing" secondItem="cWI-mc-JnF" secondAttribute="trailing" constant="20" id="76c-h4-9s3"/>
                     <constraint firstItem="cWI-mc-JnF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="93" id="7bO-uw-zs8"/>
                     <constraint firstItem="cWI-mc-JnF" firstAttribute="top" secondItem="POU-i3-mIz" secondAttribute="bottom" constant="2" id="Dfe-nl-TlZ"/>
                     <constraint firstItem="POU-i3-mIz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="93" id="F2o-Ak-S1v"/>
-                    <constraint firstAttribute="trailing" secondItem="AYe-rs-aJW" secondAttribute="trailing" constant="10" id="VQU-LK-OJk"/>
-                    <constraint firstItem="AYe-rs-aJW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ouA-BA-fGg" secondAttribute="trailing" constant="54" id="Yw3-q7-xpy"/>
+                    <constraint firstAttribute="trailing" secondItem="AYe-rs-aJW" secondAttribute="trailing" constant="15" id="VQU-LK-OJk"/>
+                    <constraint firstItem="AYe-rs-aJW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ouA-BA-fGg" secondAttribute="trailing" constant="10" id="Yw3-q7-xpy"/>
                     <constraint firstItem="ca8-uA-pzM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="fXm-nZ-PuK"/>
                     <constraint firstItem="ca8-uA-pzM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="qgp-OL-gnb"/>
                     <constraint firstItem="ca8-uA-pzM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="sg8-rd-pD3"/>
@@ -65,6 +65,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="tweetLabel" destination="cWI-mc-JnF" id="fhz-Ac-jim"/>
+                <outlet property="tweetTimeLabel" destination="AYe-rs-aJW" id="KXG-5L-fDK"/>
                 <outlet property="userHandleLabel" destination="ouA-BA-fGg" id="QnY-GH-MjB"/>
                 <outlet property="userImageView" destination="ca8-uA-pzM" id="yyb-XQ-NzT"/>
                 <outlet property="userNameLabel" destination="POU-i3-mIz" id="1ut-Ri-iLr"/>

@@ -12,6 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "Tweet.h"
 #import "TweetCell.h"
+#import "ComposeViewController.h"
 
 
 @interface TweetsViewController ()
@@ -51,6 +52,17 @@
     [self reloadTweets];
     [self setupPullToRefresh];
     
+    // setup right navigation button
+    UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(loadComposeViewController)];
+    self.navigationItem.rightBarButtonItem = composeButton;
+    
+    // setup back button for child view controller
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
+}
+
+- (void)loadComposeViewController {
+    ComposeViewController *composeViewController = [[ComposeViewController alloc] init];
+    [self.navigationController pushViewController:composeViewController animated:YES];
 
 }
 
@@ -67,12 +79,12 @@
             NSLog(@"Couldn't deserealize app info data into JSON from NSData: %@", error);
             // TODO - retry
         } else {
-            NSLog(@"mantle object array is %@", self.tweets);
+            // NSLog(@"mantle object array is %@", self.tweets);
         }
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // TODO failed to load data - show retry
-        NSLog(@"failed to get response");
+        NSLog(@"failed to get response - %@", error);
         [self.refreshControl endRefreshing];
     }];
 }
@@ -116,8 +128,14 @@
     cell.userNameLabel.text = tweet.userName;
     cell.userHandleLabel.text = [NSString stringWithFormat:@"@%@", tweet.userHandle];
     cell.tweetLabel.text = tweet.tweetText;
-    
-    NSURL *userPhotoURL = tweet.userPhotoURL;
+    //cell.tweetTimeLabel.text = tweet.createdAtDate;
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yy"];
+    NSString *str = [dateFormatter stringFromDate:tweet.createdAtDate];
+    cell.tweetTimeLabel.text = str;
+
+    NSURL *userPhotoURL = tweet.userProfileURL;
     
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:userPhotoURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     
