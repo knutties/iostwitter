@@ -51,8 +51,7 @@
         self.twitterUser = [MTLJSONAdapter modelOfClass:[TwitterUser class] fromJSONDictionary:responseObject error:&error];
         
         self.userNameLabel.text = self.twitterUser.userName;
-        self.userHandleLabel.text = self.twitterUser.userHandle;
-        
+        self.userHandleLabel.text = [self.twitterUser getUserHandleForDisplay];
         NSURL *userProfileURL = self.twitterUser.userProfileURL;
         
         NSURLRequest *urlRequest = [NSURLRequest requestWithURL:userProfileURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];

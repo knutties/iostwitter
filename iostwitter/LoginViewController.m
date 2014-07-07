@@ -35,6 +35,13 @@
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:nil action:nil];
 
+    // style the navigation bar
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.333 green:0.6745 blue:0.933 alpha:1.0];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+
+
     NSString *consumerKey = NSLocalizedStringFromTable(@"consumerKey",  @"keys", @"comment");
     NSString *consumerSecret = NSLocalizedStringFromTable(@"consumerSecret",  @"keys", @"comment");
     self.client = [TwitterClient instance:consumerKey consumerSecret:consumerSecret];

@@ -126,9 +126,8 @@
     Tweet *tweet = self.tweets[indexPath.row];
     
     cell.userNameLabel.text = tweet.userName;
-    cell.userHandleLabel.text = [NSString stringWithFormat:@"@%@", tweet.userHandle];
+    cell.userHandleLabel.text = [tweet getUserHandleForDisplay];
     cell.tweetLabel.text = tweet.tweetText;
-    //cell.tweetTimeLabel.text = tweet.createdAtDate;
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yy"];

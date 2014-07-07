@@ -17,4 +17,6 @@
 @property (nonatomic) NSDate *createdAtDate;
 @property (nonatomic) NSURL *userProfileURL;
 
+- (NSString *) getUserHandleForDisplay;
+
 @end

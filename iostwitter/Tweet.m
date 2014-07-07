@@ -48,4 +48,8 @@
     return dateFormatter;
 }
 
+- (NSString *) getUserHandleForDisplay {
+    return [NSString stringWithFormat:@"@%@", self.userHandle];
+}
+
 @end

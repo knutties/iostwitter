@@ -16,4 +16,6 @@
 @property (nonatomic) NSString *userName;
 @property (nonatomic) NSURL *userProfileURL;
 
+- (NSString *) getUserHandleForDisplay;
+
 @end

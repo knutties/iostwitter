@@ -28,4 +28,8 @@
     return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
 }
 
+- (NSString *) getUserHandleForDisplay {
+    return [NSString stringWithFormat:@"@%@", self.userHandle];
+}
+
 @end
