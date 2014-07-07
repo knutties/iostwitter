@@ -9,11 +9,10 @@
 #import "TweetsViewController.h"
 #import "TwitterClient.h"
 #import "MTLJSONAdapter.h"
-#import "UIImageView+AFNetworking.h"
 #import "Tweet.h"
 #import "TweetCell.h"
 #import "ComposeViewController.h"
-
+#import "TweetViewController.h"
 
 @interface TweetsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -56,20 +55,25 @@
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] initWithTitle:@"New" style:UIBarButtonItemStylePlain target:self action:@selector(loadComposeViewController)];
     self.navigationItem.rightBarButtonItem = composeButton;
     
-    // setup back button for child view controller
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (void)loadComposeViewController {
+    
+    // setup back button for child view controller
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
+
     ComposeViewController *composeViewController = [[ComposeViewController alloc] init];
     [self.navigationController pushViewController:composeViewController animated:YES];
 
 }
 
+- (void) loadTweetViewController {
+}
+
 - (void) reloadTweets {
 
     [self.client homeTimeLineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSLog(@"response is %@", responseObject);
+        // NSLog(@"response is %@", responseObject);
         [self.refreshControl endRefreshing];
 
         NSError *error;
@@ -123,33 +127,26 @@
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     
-    Tweet *tweet = self.tweets[indexPath.row];
-    
-    cell.userNameLabel.text = tweet.userName;
-    cell.userHandleLabel.text = [tweet getUserHandleForDisplay];
-    cell.tweetLabel.text = tweet.tweetText;
-
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/yy"];
-    NSString *str = [dateFormatter stringFromDate:tweet.createdAtDate];
-    cell.tweetTimeLabel.text = str;
-
-    NSURL *userPhotoURL = tweet.userProfileURL;
-    
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:userPhotoURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
-    [cell.userImageView setImageWithURLRequest:urlRequest placeholderImage:[UIImage imageNamed:@"1x1"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        cell.userImageView.image = image;
-        [UIView animateWithDuration:1.0 animations:^{
-            cell.userImageView.alpha = 1.0;
-        }];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        // TODO - fall back to default url
-        NSLog(@"Request failed with error: %@", error);
-    }];
+    cell.tweet = self.tweets[indexPath.row];
+    [cell updateUIFromData];
     
     return cell;
 }
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // NSLog(@"Navigation Controller: %@", self.navigationController);
+    TweetCell *selectedCell = [tableView cellForRowAtIndexPath: indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // setup back button for child view controller
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    TweetViewController *tweetViewController = [[TweetViewController alloc] init];
+    tweetViewController.tweet = selectedCell.tweet;
+    [self.navigationController pushViewController:tweetViewController animated:YES];
+    
+}
+
 
 
 @end

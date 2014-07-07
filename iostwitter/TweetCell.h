@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Tweet.h"
 
 @interface TweetCell : UITableViewCell
 
@@ -15,5 +16,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *userHandleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetTimeLabel;
+
+@property (nonatomic) Tweet *tweet;
+
+- (void) updateUIFromData;
 
 @end

@@ -19,6 +19,8 @@
 		42A4A408196A79AD005B5308 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A4A406196A79AD005B5308 /* ComposeViewController.m */; };
 		42A4A409196A79AD005B5308 /* ComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A4A407196A79AD005B5308 /* ComposeViewController.xib */; };
 		42A4A40C196A866B005B5308 /* TwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A4A40B196A866B005B5308 /* TwitterUser.m */; };
+		42A4A410196B148B005B5308 /* TweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A4A40E196B148B005B5308 /* TweetViewController.m */; };
+		42A4A411196B148B005B5308 /* TweetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A4A40F196B148B005B5308 /* TweetViewController.xib */; };
 		42AD45EB196521DF006724DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AD45EA196521DF006724DE /* Foundation.framework */; };
 		42AD45ED196521DF006724DE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AD45EC196521DF006724DE /* CoreGraphics.framework */; };
 		42AD45EF196521DF006724DE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AD45EE196521DF006724DE /* UIKit.framework */; };
@@ -65,6 +67,9 @@
 		42A4A407196A79AD005B5308 /* ComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeViewController.xib; sourceTree = "<group>"; };
 		42A4A40A196A866B005B5308 /* TwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterUser.h; sourceTree = "<group>"; };
 		42A4A40B196A866B005B5308 /* TwitterUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterUser.m; sourceTree = "<group>"; };
+		42A4A40D196B148B005B5308 /* TweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetViewController.h; sourceTree = "<group>"; };
+		42A4A40E196B148B005B5308 /* TweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetViewController.m; sourceTree = "<group>"; };
+		42A4A40F196B148B005B5308 /* TweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetViewController.xib; sourceTree = "<group>"; };
 		42AD45E7196521DF006724DE /* iostwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iostwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42AD45EA196521DF006724DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		42AD45EC196521DF006724DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -167,6 +172,9 @@
 				42A4A407196A79AD005B5308 /* ComposeViewController.xib */,
 				42A4A40A196A866B005B5308 /* TwitterUser.h */,
 				42A4A40B196A866B005B5308 /* TwitterUser.m */,
+				42A4A40D196B148B005B5308 /* TweetViewController.h */,
+				42A4A40E196B148B005B5308 /* TweetViewController.m */,
+				42A4A40F196B148B005B5308 /* TweetViewController.xib */,
 			);
 			path = iostwitter;
 			sourceTree = "<group>";
@@ -277,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42A4A411196B148B005B5308 /* TweetViewController.xib in Resources */,
 				424A0999196531D2008ED7D7 /* keys.strings in Resources */,
 				42AD45F5196521DF006724DE /* InfoPlist.strings in Resources */,
 				42A4A3F5196834DB005B5308 /* TweetsViewController.xib in Resources */,
@@ -339,6 +348,7 @@
 				42AD45FB196521DF006724DE /* AppDelegate.m in Sources */,
 				424128511965225B00DFBAC4 /* TwitterClient.m in Sources */,
 				42A4A3F819683760005B5308 /* Tweet.m in Sources */,
+				42A4A410196B148B005B5308 /* TweetViewController.m in Sources */,
 				42A4A3F4196834DB005B5308 /* TweetsViewController.m in Sources */,
 				42AD45F7196521DF006724DE /* main.m in Sources */,
 				42A4A3FF1968C550005B5308 /* TweetCell.m in Sources */,

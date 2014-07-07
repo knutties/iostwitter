@@ -17,11 +17,16 @@
 {
     // model_property_name : json_field_name
     return @{
+             @"id": @"id",
+             @"id_str": @"id_str",
              @"userName" : @"user.name",
              @"userHandle" : @"user.screen_name",
              @"tweetText" : @"text",
              @"userProfileURL": @"user.profile_image_url",
-             @"createdAtDate": @"created_at"
+             @"createdAtDate": @"created_at",
+             @"retweetCount": @"retweet_count",
+             @"retweeted": @"retweeted",
+             @"favoriteCount": @"favorite_count"
              };
 }
 

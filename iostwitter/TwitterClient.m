@@ -35,8 +35,6 @@ static NSString *const twitterBaseURL = @"https://api.twitter.com/";
         
         NSString *authURL = [NSString stringWithFormat:@"%@oauth/authorize?oauth_token=%@",twitterBaseURL,requestToken.token];
         
-        NSLog(@"auth url is %@", authURL);
-        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:authURL]];
         
     } failure:^(NSError *error) {
@@ -65,6 +63,20 @@ static NSString *const twitterBaseURL = @"https://api.twitter.com/";
                                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     return [self GET:@"1.1/account/verify_credentials.json"
           parameters:nil success:success failure:failure];
+}
+
+
+- (AFHTTPRequestOperation *) retweet:(NSString *)tweetId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", tweetId];
+    return [self POST:url
+           parameters:nil success:success failure:failure];
+}
+
+- (AFHTTPRequestOperation *) favorite:(NSString *)tweetId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    return [self POST:@"1.1/favorites/create.json"
+           parameters:@{ @"id": tweetId} success:success failure:failure];
 }
 
 
