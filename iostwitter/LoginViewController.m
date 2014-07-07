@@ -8,9 +8,12 @@
 
 #import "LoginViewController.h"
 #import "TwitterClient.h"
+#import "TweetsViewController.h"
 
 @interface LoginViewController ()
 - (IBAction)onLogin:(id)sender;
+
+@property (nonatomic) TwitterClient *client;
 
 @end
 
@@ -32,6 +35,16 @@
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:nil action:nil];
 
+    NSString *consumerKey = NSLocalizedStringFromTable(@"consumerKey",  @"keys", @"comment");
+    NSString *consumerSecret = NSLocalizedStringFromTable(@"consumerSecret",  @"keys", @"comment");
+    self.client = [TwitterClient instance:consumerKey consumerSecret:consumerSecret];
+
+    
+    if(self.client.requestSerializer.accessToken != nil) {
+        // we have an access token - try fetching tweets
+        TweetsViewController *tweetsViewController = [[TweetsViewController alloc] init];
+        [self.navigationController pushViewController:tweetsViewController animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,15 +54,7 @@
 }
 
 - (IBAction)onLogin:(id)sender {
-    NSString *consumerKey = NSLocalizedStringFromTable(@"consumerKey",  @"keys", @"comment");
-    NSString *consumerSecret = NSLocalizedStringFromTable(@"consumerSecret",  @"keys", @"comment");
-    
-    [[TwitterClient instance:consumerKey consumerSecret:consumerSecret] login];
+    [self.client login];
 }
 
-- (void) logout {
-    TwitterClient *client = [TwitterClient instance:nil consumerSecret:nil];
-    NSLog(@"logging out");
-    [client logout];
-}
 @end

@@ -41,9 +41,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
+    NSString *consumerKey = NSLocalizedStringFromTable(@"consumerKey",  @"keys", @"comment");
+    NSString *consumerSecret = NSLocalizedStringFromTable(@"consumerSecret",  @"keys", @"comment");
     
-    LoginViewController *lvc = [[LoginViewController alloc] init];
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:lvc];
+    TwitterClient *client = [TwitterClient instance:consumerKey consumerSecret:consumerSecret];
+    
+    LoginViewController *vc = [[LoginViewController alloc] init];
+    
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nvc;
     
     self.navigationController = nvc;

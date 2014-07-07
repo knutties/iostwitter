@@ -45,6 +45,7 @@ static NSString *const twitterBaseURL = @"https://api.twitter.com/";
 }
 
 - (void) logout {
+    NSLog(@"removing access token");
     [self.requestSerializer removeAccessToken];
 }
 

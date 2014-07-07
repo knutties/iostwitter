@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *tweets;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (nonatomic) TwitterClient *client;
+
 
 @end
 
@@ -36,7 +38,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
+    self.client = [TwitterClient instance:nil consumerSecret:nil];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -52,8 +55,8 @@
 }
 
 - (void) reloadTweets {
-    TwitterClient *client = [TwitterClient instance:nil consumerSecret:nil];
-    [client homeTimeLineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+    [self.client homeTimeLineWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         //NSLog(@"response is %@", responseObject);
         [self.refreshControl endRefreshing];
 
@@ -89,6 +92,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [self.client logout];
+    }
+    [super viewWillDisappear:animated];
+}
 
 #pragma mark - our table view implementation
 
