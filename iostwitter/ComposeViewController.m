@@ -70,7 +70,7 @@
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed to get current user details");
+        NSLog(@"failed to get current user details, %@", error);
     }];
     
     UIBarButtonItem *tweetButton = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(postTweet)];
@@ -85,12 +85,18 @@
 }
 
 - (void) postTweet {
-    [self.client composeTweet:self.composeTextView.text success:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSString *inReplyToTweetId = nil;
+    
+    if(self.inReplyToTweet != nil) {
+        inReplyToTweetId = self.inReplyToTweet.id_str;
+    }
+    
+    [self.client composeTweet:self.composeTextView.text inReplyTo:inReplyToTweetId success:^(AFHTTPRequestOperation *operation, NSError *error) {
         // TODO failed to load data - show retry
         NSLog(@"successfully posted tweet");
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed to post tweet");
+        NSLog(@"failed to post tweet, %@", error);
     }
      ];
 }

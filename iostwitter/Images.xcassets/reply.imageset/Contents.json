@@ -3,11 +3,7 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "favorite.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x"
+      "filename" : "reply.png"
     }
   ],
   "info" : {

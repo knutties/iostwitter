@@ -9,6 +9,7 @@
 #import "TweetViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "TwitterClient.h"
+#import "ComposeViewController.h"
 
 
 @interface TweetViewController ()
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *favoriteLabel;
 - (IBAction)onRetweet:(id)sender;
 - (IBAction)onFavorite:(id)sender;
+- (IBAction)onReply:(id)sender;
 @property (nonatomic) TwitterClient *client;
 
 
@@ -95,6 +97,7 @@
 }
 
 - (IBAction)onFavorite:(id)sender {
+    NSLog(@"calling onFavorite method");
     [self.client favorite:self.tweet.id_str success:^(AFHTTPRequestOperation *operation, NSError *error) {
         // TODO failed to load data - show retry
         NSLog(@"successfully favorited tweet %@", self.tweet.id_str);
@@ -103,5 +106,14 @@
         NSLog(@"failed to favorite tweet %@, reason %@", self.tweet.id_str, error);
     }
      ];
+}
+
+- (IBAction)onReply:(id)sender {
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    ComposeViewController *composeViewController = [[ComposeViewController alloc] init];
+    composeViewController.inReplyToTweet = self.tweet;
+    [self.navigationController pushViewController:composeViewController animated:NO];
+    
 }
 @end

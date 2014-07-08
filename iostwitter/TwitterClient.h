@@ -22,7 +22,7 @@
 - (AFHTTPRequestOperation *) currentUserDetails:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-- (AFHTTPRequestOperation *) composeTweet:(NSString *)status success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+- (AFHTTPRequestOperation *) composeTweet:(NSString *)status inReplyTo:(NSString*)inReplyTo success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 - (AFHTTPRequestOperation *) retweet:(NSString *)tweetId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success

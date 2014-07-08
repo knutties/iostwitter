@@ -53,10 +53,20 @@ static NSString *const twitterBaseURL = @"https://api.twitter.com/";
           parameters:nil success:success failure:failure];
 }
 
-- (AFHTTPRequestOperation *) composeTweet:(NSString *)status success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+- (AFHTTPRequestOperation *) composeTweet:(NSString *)status inReplyTo:(NSString*)inReplyTo success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure {
+//    NSDictionary *parameters = (NSDictionary *)@{ @"status" : status};
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    [parameters setValue:status forKey:@"status"];
+
+    if(inReplyTo != nil) {
+        [parameters setValue:inReplyTo forKey:@"in_reply_to_status_id"];
+    }
+    
+    NSLog(@"parameters to compose %@", parameters);
+
     return [self POST:@"1.1/statuses/update.json"
-          parameters:@{ @"status": status } success:success failure:failure];
+          parameters:parameters success:success failure:failure];
 }
 
 - (AFHTTPRequestOperation *) currentUserDetails:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success

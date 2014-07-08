@@ -107,13 +107,23 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cb8-sO-ytH">
-                    <rect key="frame" x="56" y="360" width="28" height="22"/>
+                    <rect key="frame" x="76" y="360" width="28" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="favorite">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onFavorite:" destination="-1" eventType="touchUpInside" id="pbL-la-Y0L"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwh-ZU-Xvr">
+                    <rect key="frame" x="138" y="361" width="28" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="reply">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onReply:" destination="-1" eventType="touchUpInside" id="9BJ-TS-0bl"/>
                     </connections>
                 </button>
             </subviews>
@@ -124,6 +134,7 @@
     </objects>
     <resources>
         <image name="favorite" width="16" height="16"/>
+        <image name="reply" width="16" height="16"/>
         <image name="retweet" width="16" height="16"/>
     </resources>
 </document>
