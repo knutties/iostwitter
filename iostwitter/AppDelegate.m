@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "TwitterClient.h"
 #import "TweetsViewController.h"
+#import "ContentViewController.h"
 
 @implementation NSURL (dictionaryFromQueryString)
 
@@ -44,7 +45,9 @@
     LoginViewController *vc = [[LoginViewController alloc] init];
     
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nvc;
+    self.window.rootViewController = vc;
+    
+    
     
     self.navigationController = nvc;
 
@@ -100,8 +103,8 @@
                      
                      // we have successfully logged-in, load the tweets view controller
                      
-                     TweetsViewController *tweetsViewController = [[TweetsViewController alloc] init];
-                     [self.navigationController pushViewController:tweetsViewController animated:YES];
+                     ContentViewController *contentViewController = [[ContentViewController alloc] init];
+                     self.window.rootViewController = contentViewController;
                      
                  } failure:^(NSError *error) {
                      NSLog(@"failed to get access token");

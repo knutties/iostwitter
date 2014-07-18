@@ -53,6 +53,14 @@ static NSString *const twitterBaseURL = @"https://api.twitter.com/";
           parameters:nil success:success failure:failure];
 }
 
+- (AFHTTPRequestOperation *) userTimeLineWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    return [self GET:@"1.1/statuses/user_timeline.json"
+          parameters:nil success:success failure:failure];
+}
+
+
+
 - (AFHTTPRequestOperation *) composeTweet:(NSString *)status inReplyTo:(NSString*)inReplyTo success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error)) failure {
 //    NSDictionary *parameters = (NSDictionary *)@{ @"status" : status};

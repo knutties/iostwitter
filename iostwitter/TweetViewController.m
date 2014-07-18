@@ -48,7 +48,7 @@
     NSString *consumerKey = NSLocalizedStringFromTable(@"consumerKey",  @"keys", @"comment");
     NSString *consumerSecret = NSLocalizedStringFromTable(@"consumerSecret",  @"keys", @"comment");
     self.client = [TwitterClient instance:consumerKey consumerSecret:consumerSecret];
-    
+        
 }
 
 - (void)didReceiveMemoryWarning

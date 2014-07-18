@@ -7,7 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TwitterClient.h"
+#import "MenuViewController.h"
 
-@interface TweetsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@protocol TweetsViewControllerDelegate <NSObject>
+
+@optional
+- (void)movePanelLeft;
+- (void)movePanelRight;
+
+@required
+- (void)movePanelToOriginalPosition;
+
+@end
+
+
+@interface TweetsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MenuViewControllerDelegate>
+@property (nonatomic, assign) id<TweetsViewControllerDelegate> delegate;
+@property (strong, nonatomic) NSArray *tweets;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (nonatomic) TwitterClient *client;
+
+- (id)initWithName:(NSString *)theName;
 @end

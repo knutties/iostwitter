@@ -45,12 +45,18 @@
     NSString *consumerKey = NSLocalizedStringFromTable(@"consumerKey",  @"keys", @"comment");
     NSString *consumerSecret = NSLocalizedStringFromTable(@"consumerSecret",  @"keys", @"comment");
     self.client = [TwitterClient instance:consumerKey consumerSecret:consumerSecret];
+}
 
+-(void)viewWillAppear:(BOOL)animated {
+    NSLog(@"view did appear called");
+    
+    NSLog(@"%@", self.client.requestSerializer.accessToken);
     
     if(self.client.requestSerializer.accessToken != nil) {
-        // we have an access token - try fetching tweets
+        // we have an access token - try fetching tweets]
         TweetsViewController *tweetsViewController = [[TweetsViewController alloc] init];
-        [self.navigationController pushViewController:tweetsViewController animated:YES];
+        NSLog(@"changing present view controller");
+        [self presentViewController:tweetsViewController animated:YES completion:nil];
     }
 }
 
