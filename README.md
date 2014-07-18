@@ -20,6 +20,13 @@ Time spent on this exercise is about 13 hours
 * [ ] Optional: Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
 * [ ] Optional: User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 
+## User stories (twitter redux)
+* Hamburger menu
+    * [x] Dragging anywhere in the view should reveal the menu.
+    * [x] The menu should include links to your profile, the home timeline.
+* Profile page
+    * [ ] Contains the user header view (TBD)
+
 ## Demo
 ![demo](screencast.gif)
 
